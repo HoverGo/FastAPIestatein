@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 async def lifespan(app: FastAPI):
     print("App is open")
     print(engine)
-    # await delete_tables()
+    await delete_tables()
     await create_tables()
     yield
     print("App is closed")

@@ -1,7 +1,12 @@
 from src.schemas.base_schema import BaseSchema
 from typing import List, Optional
+from pydantic import ConfigDict
 
 
-class CategorySchema(BaseSchema):
+class CategorySchemaAdd(BaseSchema):
     name: str
 
+
+class CategorySchema(CategorySchemaAdd):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
