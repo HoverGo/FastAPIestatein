@@ -1,6 +1,6 @@
 DB_USER = "postgres"
 DB_PASSWORD = "SideGame"
-DB_HOST = "0.0.0.0"
+DB_HOST = "localhost"
 DB_PORT = "5432"
 DB_NAME = "APIproduct"
 
