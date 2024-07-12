@@ -4,8 +4,10 @@ from src.models.base_model import create_tables, delete_tables
 from contextlib import asynccontextmanager
 
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    """Асинхронный контекстный менеджер, обрабатывающий вход и выход из приложения"""
     print("App is open")
     await delete_tables()
     await create_tables()

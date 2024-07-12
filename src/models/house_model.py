@@ -4,12 +4,14 @@ from src.models.base_model import BaseModel
 # from src.models.house_form_model import HouseForm
 
 class Category(BaseModel):
+    """Категории, к которым относится недвижимость"""
     __tablename__ = "category"
 
     name: Mapped[str] = mapped_column(unique=True)
 
 
 class PropertyType(BaseModel):
+    """Тип недвижимости"""
     __tablename__ = "property_type"
 
     name: Mapped[str] = mapped_column(unique=True)

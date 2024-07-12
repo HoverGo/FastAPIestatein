@@ -7,8 +7,8 @@ class CategoryService(BaseService):
     repository = CategoryRepository
 
     async def create(self, schema: CategorySchemaAdd):
-        object_id = await super().create(schema, self.repository)
-        return object_id
+        category_id = await super().create(schema, self.repository)
+        return category_id
     
 
     async def get_all(self) -> list[CategorySchema]:

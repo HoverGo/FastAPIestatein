@@ -5,6 +5,7 @@ from src.models.house_model import PropertyType, City
 
 
 class HouseForm(BaseModel):
+    """Форма поиска недвижимости"""
     __tablename__ = "house_form"
 
     first_name: Mapped[str]
