@@ -1,4 +1,4 @@
-from src.models.base_model import async_session
+from src.session import async_session
 from src.schemas.base_schema import BaseSchema
 from src.repositories.base_repository import BaseRepository
 from src.models.base_model import BaseModel
