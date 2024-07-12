@@ -4,13 +4,13 @@ from src.repositories.house_repository import CategoryRepository
 
 class CategoryService(BaseService):
 
-    @classmethod
-    async def create(cls, schema: CategorySchemaAdd):
-        object_id = await super().create(schema, CategoryRepository)
+    repository = CategoryRepository
+
+    async def create(self, schema: CategorySchemaAdd):
+        object_id = await super().create(schema, self.repository)
         return object_id
     
 
-    @classmethod
-    async def get_all(cls) -> list[CategorySchema]:
-        queryset = await super().get_all(CategoryRepository)
+    async def get_all(self) -> list[CategorySchema]:
+        queryset = await super().get_all(self.repository)
         return queryset
