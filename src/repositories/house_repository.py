@@ -1,25 +1,26 @@
 from sqlalchemy import select
-from src.repositories.base_repository import async_session
-from src.models.house_model import CategoryModel
+from src.models.base_model import async_session
+from src.repositories.base_repository import BaseRepository
+from src.models.house_model import Category
 from src.schemas.house_schema import CategorySchema, CategorySchemaAdd
 
-
-class CategoryRepository:
+class CategoryRepository(BaseRepository):
 
     @classmethod
-    async def add_category(cls, category: CategorySchemaAdd) -> int:
+    async def create(cls, category: CategorySchemaAdd) -> int:
         async with async_session() as session:
             data = category.model_dump()
-            new_category = CategoryModel(**data)
+            new_category = Category(**data)
             session.add(new_category)
             await session.flush()
             await session.commit()
             return new_category.id
 
+
     @classmethod
-    async def get_categories(cls) -> list[CategorySchema]:
+    async def get_all(cls) -> list[CategorySchema]:
         async with async_session() as session:
-            query = select(CategoryModel)
+            query = select(Category)
             result = await session.execute(query)
             category_models = result.scalars().all()
             categories = [

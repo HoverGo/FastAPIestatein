@@ -9,4 +9,3 @@ class CategorySchemaAdd(BaseSchema):
 
 class CategorySchema(CategorySchemaAdd):
     id: int
-    model_config = ConfigDict(from_attributes=True)

@@ -1,7 +1,15 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
-from config.database.db_settings import DB_URL
+from abc import abstractmethod
 
 
-engine = create_async_engine(DB_URL)
+class BaseRepository():
 
-async_session = async_sessionmaker(engine, expire_on_commit=False)
+    @abstractmethod
+    async def create():
+        pass
+
+
+    @abstractmethod
+    async def get_all():
+        pass
+
+
