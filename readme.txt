@@ -22,3 +22,5 @@ UoW - класс, объединяющий репозитории.
 
 
 start server - uvicorn main:app --reload
+
+Необходимо добавить Poetry
