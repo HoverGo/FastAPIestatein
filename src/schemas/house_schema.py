@@ -1,6 +1,5 @@
 from src.schemas.base_schema import BaseSchema
 from typing import List, Optional
-from pydantic import ConfigDict
 
 
 class CategorySchemaAdd(BaseSchema):
@@ -9,3 +8,29 @@ class CategorySchemaAdd(BaseSchema):
 
 class CategorySchema(CategorySchemaAdd):
     id: int
+
+
+class PropertyTypeSchemaAdd(BaseSchema):
+    name: str
+
+
+class PropetryTypeSchema(PropertyTypeSchemaAdd):
+    id: int
+
+
+class CountrySchemaAdd(BaseSchema):
+    name: str
+
+
+class CountrySchema(CountrySchemaAdd):
+    id: int
+
+
+class CitySchemaAdd(BaseSchema):
+    name: str
+    country: CountrySchema
+
+
+class CitySchema(CitySchemaAdd):
+    id: int
+    country_id: int
