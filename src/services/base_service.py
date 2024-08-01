@@ -5,7 +5,7 @@ from src.models.base_model import BaseModel
 class BaseService():
     """Сервис с базовым функционалом"""
 
-    def __init___(self, db_session) -> None:
+    def __init__(self, db_session) -> None:
         self.db_session = db_session
 
     async def create(self, data: BaseSchema, Repository: BaseRepository, model: BaseModel) -> int: # Возвращает id созданного объекта

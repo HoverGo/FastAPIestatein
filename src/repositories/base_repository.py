@@ -20,7 +20,7 @@ class BaseRepository(AbstractRepository):
             return instance.id
 
 
-    async def get_all(self) -> list[CategorySchema]:
+    async def get_all(self) -> list[BaseSchema]:
         async with self.db_session() as session:
             query = select(self.model)
             result = await session.execute(query)
