@@ -7,6 +7,11 @@ class CategoryRepository(BaseRepository):
     async def create(self, category_data: CategorySchemaAdd) -> int:
         id = await super().create(category_data)
         return id
+    
+    
+    async def get_one(self, **filters) -> CategorySchema:
+        instance = await super().get_one(**filters)
+        return instance
 
 
     async def get_all(self) -> list[CategorySchema]:

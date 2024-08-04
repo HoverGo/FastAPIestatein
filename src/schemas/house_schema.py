@@ -10,6 +10,10 @@ class CategorySchema(CategorySchemaAdd):
     id: int
 
 
+class CategorySchemaOnce(BaseSchema):
+    id: int
+
+
 class PropertyTypeSchemaAdd(BaseSchema):
     name: str
 

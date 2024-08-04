@@ -19,10 +19,22 @@ class BaseRepository(AbstractRepository):
             await session.commit()
             return instance.id
 
-
-    async def get_all(self) -> list[BaseSchema]:
+        
+    async def get_one(self, **filters) -> BaseSchema:
         async with self.db_session() as session:
-            query = select(self.model)
+            query = select(self.model).filter_by(**filters)
+            result = await session.execute(query)
+            instance = result.scalar_one_or_none()
+            return instance
+
+
+    async def get_all(
+            self,
+            limit: int = 100,
+            offset: int = 0
+            ) -> list[BaseSchema]:
+        async with self.db_session() as session:
+            query = select(self.model).offset(offset).limit(limit)
             result = await session.execute(query)
             objects = result.scalars().all()
             return objects
