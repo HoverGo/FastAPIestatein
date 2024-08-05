@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends
 from src.session import async_session
 from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CategorySchemaOnce
 from src.services.house_service import CategoryService
-from src.schemas.house_form_schema import HouseFormSchemaAdd
+from src.schemas.house_form_schema import HouseFormSchemaAdd, HouseFormSchema
+from src.services.house_form_service import HouseFormService
 
 router = APIRouter(prefix="/api")
 
@@ -34,3 +35,10 @@ async def get_category(category_pk: CategorySchemaOnce = Depends()) -> CategoryS
 @router.post("/house_form")
 async def add_house_form(house_form: HouseFormSchemaAdd = Depends()):
     pass
+
+@router.get("/get_house_form")
+async def get_house_forms() -> list[HouseFormSchemaAdd]:
+    session = async_session
+    house_form_service = HouseFormService(session)
+    house_forms = await house_form_service.get_all()
+    return house_forms

@@ -1,7 +1,6 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models.base_model import BaseModel
-# from src.models.house_form_model import HouseForm
 
 class Category(BaseModel):
     """Категории, к которым относится недвижимость"""
@@ -16,7 +15,7 @@ class PropertyType(BaseModel):
 
     name: Mapped[str] = mapped_column(unique=True)
 
-    # house_forms: Mapped[list["HouseForm"]] = relationship(back_populates="property_type")
+    house_forms: Mapped[list["HouseForm"]] = relationship("HouseForm", back_populates="property_type")
 
 
 class Country(BaseModel):
@@ -24,7 +23,7 @@ class Country(BaseModel):
 
     name: Mapped[str] = mapped_column(unique=True)
 
-    cities: Mapped[list["City"]] = relationship(back_populates="country")
+    cities: Mapped[list["City"]] = relationship("City", back_populates="country")
 
 
 class City(BaseModel):
@@ -33,5 +32,5 @@ class City(BaseModel):
     name: Mapped[str]
     country_id: Mapped[int] = mapped_column(ForeignKey("country.id"))
 
-    country: Mapped["Country"] = relationship(back_populates="cities")
-    # house_forms: Mapped["HouseForm"] = relationship(back_populates="city")
+    country: Mapped["Country"] = relationship("Country", back_populates="cities")
+    house_forms: Mapped["HouseForm"] = relationship("HouseForm",back_populates="city")

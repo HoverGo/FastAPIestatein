@@ -1,7 +1,6 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.models.base_model import BaseModel
-from src.models.house_model import PropertyType, City
 
 
 class HouseForm(BaseModel):
@@ -21,6 +20,6 @@ class HouseForm(BaseModel):
     prefer_phone: Mapped[bool]
     message: Mapped[str]
 
-    city: Mapped["City"] = relationship(back_populates="house_forms")
-    property_type: Mapped["PropertyType"] = relationship(back_populates="house_forms")
+    city: Mapped["City"] = relationship("City", back_populates="house_forms")
+    property_type: Mapped["PropertyType"] = relationship("PropertyType", back_populates="house_forms")
     
