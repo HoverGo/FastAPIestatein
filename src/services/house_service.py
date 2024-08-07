@@ -1,24 +1,45 @@
 from src.services.base_service import BaseService
-from src.schemas.house_schema import CategorySchemaAdd, CategorySchema, CategorySchemaOnce
-from src.repositories.house_repository import CategoryRepository
-from src.models.house_model import Category
+from src.schemas.house_schema import CategorySchemaAdd, CategorySchema, CategorySchemaOnce, CitySchemaAdd, PropertyTypeSchemaAdd
+from src.repositories.house_repository import CategoryRepository, CityRepository, PropertyTypeRepository
+from src.models.house_model import Category, City, PropertyType
 
 class CategoryService(BaseService):
 
     repository = CategoryRepository
     model = Category
 
-    async def create(self, schema: CategorySchemaAdd):
-        category_id = await super().create(schema, self.repository, self.model)
-        return category_id
+    async def create(self, category_schema: CategorySchemaAdd) -> CategorySchemaAdd:
+        category = await super().create(category_schema, self.repository, self.model)
+        return category
     
 
-    async def get_one(self, schema: CategorySchemaOnce):
+    async def get_one(self, schema: CategorySchemaOnce) -> CategorySchema:
         pk = schema.model_dump()["id"]
-        instance = await super().get_one(self.repository, self.model, id=pk)
-        return instance
+        category = await super().get_one(self.repository, self.model, id=pk)
+        return category
     
 
     async def get_all(self) -> list[CategorySchema]:
-        queryset = await super().get_all(self.repository, self.model)
-        return queryset
+        categories = await super().get_all(self.repository, self.model)
+        return categories
+    
+
+class CityService(BaseService):
+
+    repository = CityRepository
+    model = City
+
+    async def create(self, city_schema: CitySchemaAdd):
+        city = await super().create(city_schema, self.repository, self.model)
+        return city
+    
+
+class PropertyTypeService(BaseService):
+
+    repository = PropertyTypeRepository
+    model = PropertyType
+
+    async def create(self, property_type_schema: PropertyTypeSchemaAdd):
+        property_type = await super().create(property_type_schema, self.repository, self.model)
+        return property_type
+                    

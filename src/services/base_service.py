@@ -14,8 +14,8 @@ class BaseService():
         необходимый для использования методов взаимодействия с БД
         """
         repository = Repository(self.db_session, model)
-        object_id = await repository.create(data) 
-        return object_id
+        instance = await repository.create(data) 
+        return instance
     
 
     async def get_one(self, Repository: BaseRepository, model: BaseModel, **filters):

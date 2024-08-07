@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from src.schemas.base_schema import BaseSchema
 from src.repositories.abstract_repository import AbstractRepository
+from sqlalchemy.orm import joinedload
 
 
 class BaseRepository(AbstractRepository):
@@ -17,7 +18,7 @@ class BaseRepository(AbstractRepository):
             session.add(instance)
             await session.flush()
             await session.commit()
-            return instance.id
+            return instance
 
         
     async def get_one(self, **filters) -> BaseSchema:
@@ -34,7 +35,7 @@ class BaseRepository(AbstractRepository):
             offset: int = 0
             ) -> list[BaseSchema]:
         async with self.db_session() as session:
-            query = select(self.model).offset(offset).limit(limit)
+            query = select(self.model).options(joinedload(self.model.city), joinedload(self.model.property_type)).offset(offset).limit(limit)
             result = await session.execute(query)
             objects = result.scalars().all()
             return objects

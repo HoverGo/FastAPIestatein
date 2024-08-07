@@ -1,5 +1,5 @@
 from src.schemas.base_schema import BaseSchema
-from src.schemas.house_schema import CitySchema, PropetryTypeSchema
+from src.schemas.house_schema import CitySchema, PropertyTypeSchema
 from pydantic import EmailStr, Field
 
 
@@ -21,4 +21,4 @@ class HouseFormSchemaAdd(BaseSchema):
 class HouseFormSchema(HouseFormSchemaAdd):
     id: int
     city: CitySchema
-    property_type: PropetryTypeSchema
+    property_type: PropertyTypeSchema

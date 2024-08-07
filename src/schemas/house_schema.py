@@ -18,7 +18,7 @@ class PropertyTypeSchemaAdd(BaseSchema):
     name: str
 
 
-class PropetryTypeSchema(PropertyTypeSchemaAdd):
+class PropertyTypeSchema(PropertyTypeSchemaAdd):
     id: int
 
 
@@ -32,9 +32,9 @@ class CountrySchema(CountrySchemaAdd):
 
 class CitySchemaAdd(BaseSchema):
     name: str
-    country: CountrySchema
-
+    country_id: int
+    
 
 class CitySchema(CitySchemaAdd):
     id: int
-    country_id: int
+    country: CountrySchema
