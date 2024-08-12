@@ -1,6 +1,6 @@
 from src.repositories.base_repository import BaseRepository
 from src.models.house_model import Category
-from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CitySchemaAdd, PropertyTypeSchemaAdd
+from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CitySchema, CitySchemaAdd, PropertyTypeSchema, PropertyTypeSchemaAdd
 
 class CategoryRepository(BaseRepository):
 
@@ -32,9 +32,23 @@ class CityRepository(BaseRepository):
         return city
     
 
+    async def get_all(self) -> list[CitySchema]:
+        city_models = await super().get_all(order="country_id")
+        cities = [CitySchema.model_validate(city)
+                  for city in city_models]
+        return cities
+    
+
 class PropertyTypeRepository(BaseRepository):
     
     
     async def create(self, property_type_data: PropertyTypeSchemaAdd) -> CitySchemaAdd:
         property_type = await super().create(property_type_data)
         return property_type
+
+
+    async def get_all(self) -> list[PropertyTypeSchema]:
+        property_type_models = await super().get_all()
+        property_types = [PropertyTypeSchema.model_validate(property_type)
+                          for property_type in property_type_models]
+        return property_types

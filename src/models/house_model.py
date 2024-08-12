@@ -32,5 +32,5 @@ class City(BaseModel):
     name: Mapped[str]
     country_id: Mapped[int] = mapped_column(ForeignKey("country.id"))
 
-    country: Mapped["Country"] = relationship("Country", back_populates="cities")
-    house_forms: Mapped["HouseForm"] = relationship("HouseForm",back_populates="city")
+    country: Mapped["Country"] = relationship("Country", back_populates="cities", lazy="joined")
+    house_forms: Mapped["HouseForm"] = relationship("HouseForm", back_populates="city")

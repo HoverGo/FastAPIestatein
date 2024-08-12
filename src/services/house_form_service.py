@@ -2,6 +2,7 @@ from src.services.base_service import BaseService
 from src.repositories.house_form_repository import HouseFormRepository
 from src.models.house_form_model import HouseForm
 from src.schemas.house_form_schema import HouseFormSchemaAdd
+from src.services.house_service import CityService, PropertyTypeService
 
 
 class HouseFormService(BaseService):
@@ -16,9 +17,3 @@ class HouseFormService(BaseService):
     async def get_all(self):
         queryset = await super().get_all(self.repository, self.model)
         return queryset
-
-
-class HouseFormDataService(BaseService):
-    
-    async def get_all(self):
-        pass

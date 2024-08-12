@@ -12,7 +12,3 @@ class HouseFormRepository(BaseRepository):
     async def get_all(self) -> list[HouseFormSchema]:
         house_form_models = await super().get_all()
         return house_form_models
-    
-
-class HouseFormDataRepository(BaseRepository):
-    pass

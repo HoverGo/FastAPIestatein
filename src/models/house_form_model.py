@@ -20,6 +20,6 @@ class HouseForm(BaseModel):
     prefer_phone: Mapped[bool]
     message: Mapped[str]
 
-    city: Mapped["City"] = relationship("City", back_populates="house_forms")
-    property_type: Mapped["PropertyType"] = relationship("PropertyType", back_populates="house_forms")
+    city: Mapped["City"] = relationship("City", back_populates="house_forms", lazy="selectin")
+    property_type: Mapped["PropertyType"] = relationship("PropertyType", back_populates="house_forms", lazy="selectin")
     
