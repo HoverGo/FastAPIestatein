@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from src.routes import router
 from src.models.base_model import create_tables, delete_tables
 from contextlib import asynccontextmanager
@@ -17,3 +18,5 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(router)
+
+app.mount("/media", StaticFiles(directory="media"), name="media")

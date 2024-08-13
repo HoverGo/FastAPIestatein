@@ -34,3 +34,4 @@ class City(BaseModel):
 
     country: Mapped["Country"] = relationship("Country", back_populates="cities", lazy="joined")
     house_forms: Mapped["HouseForm"] = relationship("HouseForm", back_populates="city")
+    reviews: Mapped["Review"] = relationship("Review", back_populates="city")
