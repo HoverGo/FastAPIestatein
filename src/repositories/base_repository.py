@@ -1,16 +1,17 @@
 from sqlalchemy import select, text
 from src.schemas.base_schema import BaseSchema
 from src.repositories.abstract_repository import AbstractRepository
-from sqlalchemy.orm import joinedload
 
 
 class BaseRepository(AbstractRepository):
     """Базовый репозиторий, содержащий в себе базовые методы"""
 
+
     def __init__(self, db_session, model) -> None:
         self.db_session = db_session
         self.model = model
         
+
     async def create(self, data: BaseSchema) -> int:
         async with self.db_session() as session:
             data = data.model_dump()

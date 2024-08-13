@@ -1,5 +1,4 @@
 from src.repositories.base_repository import BaseRepository
-from src.models.house_model import Category
 from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CitySchema, CitySchemaAdd, PropertyTypeSchema, PropertyTypeSchemaAdd
 
 class CategoryRepository(BaseRepository):

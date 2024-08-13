@@ -1,6 +1,4 @@
-from sqlalchemy import select
 from abc import abstractmethod
-from src.schemas.base_schema import BaseSchema
 
 
 class AbstractRepository():
@@ -10,6 +8,12 @@ class AbstractRepository():
     async def create():
         pass
 
+
     @abstractmethod
     async def get_all():
+        pass
+
+
+    @abstractmethod
+    async def get_one():
         pass
