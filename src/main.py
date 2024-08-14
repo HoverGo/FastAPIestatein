@@ -9,8 +9,8 @@ from contextlib import asynccontextmanager
 async def lifespan(app: FastAPI):
     """Асинхронный контекстный менеджер, обрабатывающий вход и выход из приложения"""
     print("App is open")
-    # await delete_tables()
-    # await create_tables()
+    await delete_tables()
+    await create_tables()
     yield
     print("App is closed")
 

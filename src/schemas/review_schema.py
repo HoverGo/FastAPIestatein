@@ -16,3 +16,16 @@ class ReviewAddSchema(BaseSchema):
 class ReviewSchema(ReviewAddSchema):
     id: int
     city: CitySchema
+
+
+class CompanyReviewAddSchema(BaseSchema):
+    name: str
+    since_year: int
+    domain: str
+    category_company: str
+    text: str
+    website_url: str
+
+
+class CompanyReviewSchema(CompanyReviewAddSchema):
+    id: int

@@ -17,3 +17,14 @@ class Review(BaseModel):
 
     
     city: Mapped["City"] = relationship("City", back_populates="reviews", lazy="joined")
+
+
+class CompanyReview(BaseModel):
+    __tablename__ = "company_review"
+
+    name: Mapped[str]
+    since_year: Mapped[int]
+    domain: Mapped[str]
+    category_company: Mapped[str]
+    text: Mapped[str]
+    website_url: Mapped[str]

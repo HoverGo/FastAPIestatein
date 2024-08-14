@@ -6,8 +6,8 @@ from src.schemas.house_form_schema import HouseFormSchemaAdd, HouseFormSchema
 from src.services.house_form_service import HouseFormService
 from src.schemas.question_form_schema import QuestionFormSchema, QuestionFormSchemaAdd
 from src.services.question_form_service import QuestionFormService
-from src.schemas.review_schema import ReviewSchema, ReviewAddSchema
-from src.services.review_service import ReviewService
+from src.schemas.review_schema import ReviewSchema, ReviewAddSchema, CompanyReviewSchema, CompanyReviewAddSchema
+from src.services.review_service import ReviewService, CompanyReviewService
 
 router = APIRouter(prefix="/api/v1")
 
@@ -154,3 +154,22 @@ async def get_reviews() -> list[ReviewSchema]:
 
     return reviews
     
+
+@router.post("/company_review")
+async def add_company_review(company_review: CompanyReviewAddSchema = Depends()) -> CompanyReviewAddSchema:
+    session = async_session
+
+    company_review_service = CompanyReviewService(session)
+    new_company_review = await company_review_service.create(company_review)
+
+    return new_company_review
+
+
+@router.get("/company_reviews")
+async def get_company_review() -> list[CompanyReviewSchema]:
+    session = async_session
+
+    company_review_service = CompanyReviewService(session)
+    company_reviews = await company_review_service.get_all()
+
+    return company_reviews
