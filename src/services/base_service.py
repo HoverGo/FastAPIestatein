@@ -8,7 +8,7 @@ class BaseService():
     def __init__(self, db_session) -> None:
         self.db_session = db_session
 
-    async def create(self, data: BaseSchema, Repository: BaseRepository, model: BaseModel) -> int: # Возвращает id созданного объекта
+    async def create(self, data: BaseSchema, Repository: BaseRepository, model: BaseModel) -> BaseSchema: # Возвращает созданный объект
         """
         Из класса наследника передаются схема, содержащая данные, и репозиторий,
         необходимый для использования методов взаимодействия с БД
