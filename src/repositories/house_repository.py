@@ -1,5 +1,5 @@
 from src.repositories.base_repository import BaseRepository
-from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CitySchema, CitySchemaAdd, PropertyTypeSchema, PropertyTypeSchemaAdd
+from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CitySchema, CitySchemaAdd, PropertyTypeSchema, PropertyTypeSchemaAdd, HouseSchema, HouseSchemaOnce
 
 class CategoryRepository(BaseRepository):
 
@@ -51,3 +51,17 @@ class PropertyTypeRepository(BaseRepository):
         property_types = [PropertyTypeSchema.model_validate(property_type)
                           for property_type in property_type_models]
         return property_types
+    
+
+class HouseRepository(BaseRepository):
+    
+    async def get_all(self) -> list[HouseSchema]:
+        houses_models = await super().get_all()
+        houses = [HouseSchema.model_validate(house)
+                  for house in houses_models]
+        return houses
+    
+
+    async def get_one(self, **filters) -> HouseSchemaOnce:
+        house = await super().get_one(**filters)
+        return house

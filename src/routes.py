@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from src.session import async_session
-from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CategorySchemaOnce, CitySchemaAdd, CitySchema, PropertyTypeSchemaAdd, PropertyTypeSchema
-from src.services.house_service import CategoryService, CityService, PropertyTypeService
+from src.schemas.house_schema import IdFilter, CategorySchema, CategorySchemaAdd, CitySchemaAdd, CitySchema, PropertyTypeSchemaAdd, PropertyTypeSchema, HouseSchema, HouseSchemaOnce, HouseFormDataSchema
+from src.services.house_service import CategoryService, CityService, PropertyTypeService, HouseService
 from src.schemas.house_form_schema import HouseFormSchemaAdd, HouseFormSchema
 from src.services.house_form_service import HouseFormService
 from src.schemas.question_form_schema import QuestionFormSchema, QuestionFormSchemaAdd
@@ -33,11 +33,11 @@ router = APIRouter(prefix="/api/v1")
 
 
 # @router.get("/category")
-# async def get_category(category_pk: CategorySchemaOnce = Depends()) -> CategorySchema:
+# async def get_category(pk: IdFilter = Depends()) -> CategorySchema:
 #     session = async_session
 
 #     category_service = CategoryService(session)
-#     category = await category_service.get_one(category_pk)
+#     category = await category_service.get_one(pk)
 
 #     return category
 
@@ -83,7 +83,7 @@ router = APIRouter(prefix="/api/v1")
 
 
 @router.get("/house_form_data")
-async def house_form_data() -> dict:
+async def house_form_data() -> HouseFormDataSchema:
     session = async_session
 
     property_type_service = PropertyTypeService(session)
@@ -91,7 +91,8 @@ async def house_form_data() -> dict:
     property_types = await property_type_service.get_all()
     cities = await city_service.get_all()
 
-    data = {"data": {"locations": cities, "property_types": property_types}}
+    data = HouseFormDataSchema(locations=cities, property_types=property_types)
+
     return data
 
 
@@ -173,3 +174,23 @@ async def get_company_review() -> list[CompanyReviewSchema]:
     company_reviews = await company_review_service.get_all()
 
     return company_reviews
+
+
+@router.get("/houses")
+async def get_houses() -> list[HouseSchema]:
+    session = async_session
+    
+    house_service = HouseService(session)
+    houses = await house_service.get_all()
+
+    return houses
+
+
+@router.get("/house")
+async def get_house(pk: IdFilter = Depends()) -> HouseSchemaOnce:
+    session = async_session
+    
+    house_service = HouseService(session)
+    house = await house_service.get_one(pk)
+
+    return house
