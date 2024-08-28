@@ -12,7 +12,7 @@ class Review(BaseModel):
     title: Mapped[str]
     text: Mapped[str]
     rating: Mapped[int]
-    image: Mapped[Optional[str]]
+    image: Mapped[Optional[str]] #TODO реализовать добавление картинки
     city_id: Mapped[int] = mapped_column(ForeignKey('city.id'))
 
     

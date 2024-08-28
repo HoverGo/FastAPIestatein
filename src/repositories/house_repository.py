@@ -1,5 +1,7 @@
 from src.repositories.base_repository import BaseRepository
-from src.schemas.house_schema import CategorySchema, CategorySchemaAdd, CitySchema, CitySchemaAdd, PropertyTypeSchema, PropertyTypeSchemaAdd, HouseSchema, HouseSchemaOnce
+from src.schemas.house_schema import (CategorySchema, CategorySchemaAdd, CitySchema,
+                                       CitySchemaAdd, PropertyTypeSchema, PropertyTypeSchemaAdd,
+                                         HouseSchema, HouseSchemaOnce, FormAboutHouseSchema, FormAboutHouseSchemaAdd)
 
 class CategoryRepository(BaseRepository):
 
@@ -65,3 +67,15 @@ class HouseRepository(BaseRepository):
     async def get_one(self, **filters) -> HouseSchemaOnce:
         house = await super().get_one(**filters)
         return house
+    
+
+class FormAboutHouseRepository(BaseRepository):
+    
+    async def create(self, form_about_house_data: FormAboutHouseSchemaAdd) -> FormAboutHouseSchemaAdd:
+        form_about_house = await super().create(form_about_house_data)
+        return form_about_house
+    
+
+    async def get_all(self) -> list[FormAboutHouseSchema]:
+        forms_about_schema = await super().get_all()
+        return forms_about_schema

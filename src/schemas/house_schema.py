@@ -1,5 +1,6 @@
 from src.schemas.base_schema import BaseSchema
 from typing import List, Optional
+from pydantic import EmailStr
 
 
 class IdFilter(BaseSchema):
@@ -124,3 +125,17 @@ class HouseSchemaOnce(HouseSchema):
     city: CitySchema
     property_type: PropertyTypeSchema
     pricing_details: Optional[PricingDetailsSchema] = None
+
+
+class FormAboutHouseSchemaAdd(BaseSchema):
+    first_name: str
+    last_name: str
+    email: EmailStr
+    phone: str
+    house_id: int
+    message: str
+
+
+class FormAboutHouseSchema(FormAboutHouseSchemaAdd):
+    id: int
+    house: HouseSchemaOnce 

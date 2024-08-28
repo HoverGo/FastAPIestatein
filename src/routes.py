@@ -1,13 +1,17 @@
 from fastapi import APIRouter, Depends
 from src.session import async_session
-from src.schemas.house_schema import IdFilter, CategorySchema, CategorySchemaAdd, CitySchemaAdd, CitySchema, PropertyTypeSchemaAdd, PropertyTypeSchema, HouseSchema, HouseSchemaOnce, HouseFormDataSchema
-from src.services.house_service import CategoryService, CityService, PropertyTypeService, HouseService
+from src.schemas.house_schema import (IdFilter, CategorySchema, CategorySchemaAdd,
+                                      CitySchemaAdd, CitySchema, PropertyTypeSchemaAdd,
+                                       PropertyTypeSchema, HouseSchema, HouseSchemaOnce,
+                                        HouseFormDataSchema, FormAboutHouseSchema, FormAboutHouseSchemaAdd)
+from src.services.house_service import CategoryService, CityService, PropertyTypeService, HouseService, FormAboutHouseService
 from src.schemas.house_form_schema import HouseFormSchemaAdd, HouseFormSchema
 from src.services.house_form_service import HouseFormService
 from src.schemas.question_form_schema import QuestionFormSchema, QuestionFormSchemaAdd
 from src.services.question_form_service import QuestionFormService
 from src.schemas.review_schema import ReviewSchema, ReviewAddSchema, CompanyReviewSchema, CompanyReviewAddSchema
 from src.services.review_service import ReviewService, CompanyReviewService
+
 
 router = APIRouter(prefix="/api/v1")
 
@@ -194,3 +198,23 @@ async def get_house(pk: IdFilter = Depends()) -> HouseSchemaOnce:
     house = await house_service.get_one(pk)
 
     return house
+
+
+@router.post("/form_about_house")
+async def add_form_about_house(form_about_house: FormAboutHouseSchemaAdd = Depends()) -> FormAboutHouseSchemaAdd:
+    session = async_session
+
+    form_about_house_service = FormAboutHouseService(session)
+    new_form_about_house = await form_about_house_service.create(form_about_house)
+
+    return new_form_about_house
+
+
+@router.get("/forms_about_house")
+async def get_forms_about_house() -> list[FormAboutHouseSchema]:
+    session = async_session
+
+    form_about_house_service = FormAboutHouseService(session)
+    forms_about_house = await form_about_house_service.get_all()
+
+    return forms_about_house

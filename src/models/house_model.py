@@ -59,7 +59,7 @@ class City(BaseModel):
     houses: Mapped[list["House"]] = relationship("House", back_populates="city")
 
 
-class HousePhoto(BaseModel):
+class HousePhoto(BaseModel): #TODO реализовать добавление фотографии
     __tablename__ = "house_photo"
 
     photo: Mapped[str]
@@ -162,6 +162,20 @@ class House(BaseModel):
     property_type: Mapped["PropertyType"] = relationship("PropertyType", back_populates="houses", lazy="joined")
     city: Mapped["City"] = relationship("City", back_populates="houses", lazy="joined")
     pricing_details: Mapped["PricingDetails"] = relationship("PricingDetails", back_populates="house", lazy="joined")
+    forms_about_house: Mapped["FormAboutHouse"] = relationship("FormAboutHouse", back_populates="house")
+
+
+class FormAboutHouse(BaseModel):
+    __tablename__ = "form_about_house"
+
+    first_name: Mapped[str]
+    last_name: Mapped[str]
+    email: Mapped[str]
+    phone: Mapped[str]
+    house_id: Mapped[int] = mapped_column(ForeignKey("house.id"))
+    message: Mapped[str]
+
+    house: Mapped["House"] = relationship("House", back_populates="forms_about_house", lazy="joined")
 
 
 

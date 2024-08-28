@@ -1,7 +1,11 @@
 from src.services.base_service import BaseService
-from src.schemas.house_schema import IdFilter, CategorySchemaAdd, CategorySchema, CitySchema, CitySchemaAdd, PropertyTypeSchema, PropertyTypeSchemaAdd, HouseSchema, HouseSchemaOnce
-from src.repositories.house_repository import CategoryRepository, CityRepository, PropertyTypeRepository, HouseRepository
-from src.models.house_model import Category, City, PropertyType, House
+from src.schemas.house_schema import (IdFilter, CategorySchemaAdd, CategorySchema,
+                                       CitySchema, CitySchemaAdd, PropertyTypeSchema,
+                                         PropertyTypeSchemaAdd, HouseSchema, HouseSchemaOnce,
+                                           FormAboutHouseSchema, FormAboutHouseSchemaAdd)
+from src.repositories.house_repository import CategoryRepository, CityRepository, PropertyTypeRepository, HouseRepository, FormAboutHouseRepository
+from src.models.house_model import Category, City, PropertyType, House, FormAboutHouse
+
 
 class CategoryService(BaseService):
 
@@ -68,3 +72,19 @@ class HouseService(BaseService):
         pk = schema.model_dump()["id"]
         house = await super().get_one(self.repository, self.model, id=pk)
         return house
+    
+
+class FormAboutHouseService(BaseService):
+
+    repository = FormAboutHouseRepository
+    model = FormAboutHouse
+
+    async def create(self, form_about_house_schema: FormAboutHouseSchemaAdd) -> FormAboutHouseSchemaAdd:
+        form_about_house = await super().create(form_about_house_schema, self.repository, self.model)
+        return form_about_house
+    
+
+    async def get_all(self) -> list[FormAboutHouseSchema]:
+        forms_about_schema = await super().get_all(self.repository, self.model)
+        return forms_about_schema
+    
