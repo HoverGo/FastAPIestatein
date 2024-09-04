@@ -117,8 +117,8 @@ class HouseSchema(BaseSchema):
 
 
 class HouseSchemaOnce(HouseSchema):
-    bedrooms_count: int = Field(gt=1, le=99)
-    bathrooms_count: int = Field(gt=1, le=99)
+    bedrooms_count: int = Field(gt=0, le=99)
+    bathrooms_count: int = Field(gt=0, le=99)
     area: int
     key_features: Optional[list[KeyFeaturesSchema]] = None
     house_photos: Optional[list[HousePhotoSchema]] = None

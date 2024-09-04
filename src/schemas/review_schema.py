@@ -9,8 +9,8 @@ class ReviewAddSchema(BaseSchema):
     last_name: str
     title: str
     text: str
-    rating: int = Field(gt=1, le=5)
-    image: Optional[str]
+    rating: int = Field(gt=0, le=5)
+    image: Optional[str] = None
     city_id: int
 
 

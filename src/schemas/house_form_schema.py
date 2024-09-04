@@ -9,8 +9,8 @@ class HouseFormSchemaAdd(BaseSchemaWithPhone):
     email: EmailStr
     city_id: int
     property_type_id: int
-    bedrooms_count: int = Field(gt=1, le=99)
-    bathrooms_count: int = Field(gt=1, le=99)
+    bedrooms_count: int = Field(gt=0, le=99)
+    bathrooms_count: int = Field(gt=0, le=99)
     budget: int
     prefer_email: bool
     prefer_phone: bool
