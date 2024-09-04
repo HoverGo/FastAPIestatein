@@ -1,6 +1,6 @@
-from src.schemas.base_schema import BaseSchema
+from src.schemas.base_schema import BaseSchema, BaseSchemaWithPhone
 from typing import List, Optional
-from pydantic import EmailStr
+from pydantic import EmailStr, Field
 
 
 class IdFilter(BaseSchema):
@@ -44,7 +44,7 @@ class CountrySchema(CountrySchemaAdd):
 class CitySchemaAdd(BaseSchema):
     name: str
     country_id: int
-    
+
 
 class CitySchema(CitySchemaAdd):
     id: int
@@ -64,7 +64,7 @@ class HousePhotoSchema(BaseSchema):
 class KeyFeaturesSchema(BaseSchema):
     id: int
     name: str
-    
+
 
 class AdditionalFeeSchema(BaseSchema):
     id: int
@@ -117,8 +117,8 @@ class HouseSchema(BaseSchema):
 
 
 class HouseSchemaOnce(HouseSchema):
-    bedrooms_count: int
-    bathrooms_count: int 
+    bedrooms_count: int = Field(gt=1, le=99)
+    bathrooms_count: int = Field(gt=1, le=99)
     area: int
     key_features: Optional[list[KeyFeaturesSchema]] = None
     house_photos: Optional[list[HousePhotoSchema]] = None
@@ -127,15 +127,14 @@ class HouseSchemaOnce(HouseSchema):
     pricing_details: Optional[PricingDetailsSchema] = None
 
 
-class FormAboutHouseSchemaAdd(BaseSchema):
+class FormAboutHouseSchemaAdd(BaseSchemaWithPhone):
     first_name: str
     last_name: str
     email: EmailStr
-    phone: str
     house_id: int
     message: str
 
 
 class FormAboutHouseSchema(FormAboutHouseSchemaAdd):
     id: int
-    house: HouseSchemaOnce 
+    house: HouseSchemaOnce

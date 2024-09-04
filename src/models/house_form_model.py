@@ -5,6 +5,7 @@ from src.models.base_model import BaseModel
 
 class HouseForm(BaseModel):
     """Форма поиска недвижимости"""
+
     __tablename__ = "house_form"
 
     first_name: Mapped[str]
@@ -20,6 +21,9 @@ class HouseForm(BaseModel):
     prefer_phone: Mapped[bool]
     message: Mapped[str]
 
-    city: Mapped["City"] = relationship("City", back_populates="house_forms", lazy="selectin")
-    property_type: Mapped["PropertyType"] = relationship("PropertyType", back_populates="house_forms", lazy="selectin")
-    
+    city: Mapped["City"] = relationship(
+        "City", back_populates="house_forms", lazy="selectin"
+    )
+    property_type: Mapped["PropertyType"] = relationship(
+        "PropertyType", back_populates="house_forms", lazy="selectin"
+    )

@@ -12,4 +12,3 @@ class QuestionForm(BaseModel):
     inquiry_type: Mapped[str]
     way_to_find: Mapped[str]
     message: Mapped[str]
-

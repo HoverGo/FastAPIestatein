@@ -1,6 +1,7 @@
 from src.schemas.base_schema import BaseSchema
 from src.schemas.house_schema import CitySchema
 from typing import Optional
+from pydantic import Field
 
 
 class ReviewAddSchema(BaseSchema):
@@ -8,7 +9,7 @@ class ReviewAddSchema(BaseSchema):
     last_name: str
     title: str
     text: str
-    rating: int
+    rating: int = Field(gt=1, le=5)
     image: Optional[str]
     city_id: int
 
