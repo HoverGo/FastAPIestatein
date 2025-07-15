@@ -16,76 +16,6 @@ from src.services.review_service import ReviewService, CompanyReviewService
 router = APIRouter(prefix="/api/v1")
 
 
-# @router.post("/add_category")
-# async def add_category(category: CategorySchemaAdd = Depends()) -> CategorySchema:
-#     session = async_session
-
-#     category_service = CategoryService(session)
-#     new_category = await category_service.create(category)
-
-#     return new_category
-
-
-# @router.get("/categories")
-# async def get_categories() -> list[CategorySchema]:
-#     session = async_session
-
-#     category_service = CategoryService(session)
-#     categories = await category_service.get_all()
-
-#     return categories
-
-
-# @router.get("/category")
-# async def get_category(pk: IdFilter = Depends()) -> CategorySchema:
-#     session = async_session
-
-#     category_service = CategoryService(session)
-#     category = await category_service.get_one(pk)
-
-#     return category
-
-
-# @router.post("/city")
-# async def add_city(city: CitySchemaAdd = Depends()) -> CitySchemaAdd:
-#     session = async_session
-    
-#     city_service = CityService(session)
-#     new_city = await city_service.create(city)
-
-#     return new_city
-
-
-# @router.get("/city")
-# async def get_cities() -> list[CitySchema]:
-#     session = async_session
-
-#     city_service = CityService(session)
-#     new_city = await city_service.get_all()
-
-#     return new_city
-
-
-# @router.post("/property_type")
-# async def add_property_type(property_type: PropertyTypeSchemaAdd = Depends()) -> PropertyTypeSchema:
-#     session = async_session
-
-#     property_type_service = PropertyTypeService(session)
-#     new_property_type = await property_type_service.create(property_type)
-
-#     return new_property_type
-
-
-# @router.get("/property_type")
-# async def get_property_types() -> list[PropertyTypeSchema]:
-#     session = async_session
-
-#     property_type_service = PropertyTypeService(session)
-#     property_types = await property_type_service.get_all()
-
-#     return property_types
-
-
 @router.get("/house_form_data")
 async def house_form_data() -> HouseFormDataSchema:
     session = async_session
@@ -128,16 +58,6 @@ async def add_question_form(question_form: QuestionFormSchemaAdd = Depends()) ->
     new_question_form = await question_form_service.create(question_form)
 
     return new_question_form
-
-
-# @router.get("/question_forms")
-# async def get_question_forms() -> list[QuestionFormSchema]:
-#     session = async_session
-
-#     question_form_service = QuestionFormService(session)
-#     question_forms = await question_form_service.get_all()
-
-#     return question_forms
 
 
 @router.post("/review")
